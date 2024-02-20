@@ -5,7 +5,7 @@ from PIL import Image
 
 
 class EmailExtractor:
-    def __init__(self, input_path='./input'):  # decided to make input and output hardcoded if you're willing you can choose your own =)
+    def __init__(self, input_path='./input'):  # decided to make input hardcoded if you're willing you can choose your own =)
         self.input_path = input_path
         self.output_path = './output'
         self.email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'  # to be honest I'm not really keen on regex.
@@ -33,6 +33,8 @@ class EmailExtractor:
 
 
     def write_emails_to_file(self, all_emails: dict) -> None:
+        if not os.path.exists(self.output_path):
+            os.makedirs(self.output_path)
         with open(f'{self.output_path}/{self.text_filename}', 'w') as file:
             counter = 1
             for name, email in all_emails.items():
