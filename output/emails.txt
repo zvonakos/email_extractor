@@ -1,0 +1,6 @@
+1.Info: info@business.org
+2.Contact: contact@domain.org
+3.Support: support@company.com
+4.John.doe: john.doe@example.com
+5.Jane.smith: jane.smith@emailprovider.net
+6.Sales: sales@emailservice.com
