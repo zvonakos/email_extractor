@@ -5,11 +5,12 @@ from PIL import Image
 
 
 class EmailExtractor:
-    def __init__(self, input_path='./input', output_path='./output'):  # decided to make input and output hardcoded if you're willing you can choose your own =)
+    def __init__(self, input_path='./input'):  # decided to make input and output hardcoded if you're willing you can choose your own =)
         self.input_path = input_path
-        self.output_path = output_path
+        self.output_path = './output'
         self.email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'  # to be honest I'm not really keen on regex.
         self.name_pattern = r'\b([A-Za-z0-9._%+-]+)@([A-Za-z0-9.-]+\.[A-Z|a-z]{2,})\b'  # I think there is more efficient regex for that
+        self.text_filename = 'emails.txt'
 
     def extract_emails_with_names(self, text: str) -> dict:
         matches = re.findall(self.email_pattern, text)  # finding emails
@@ -32,7 +33,7 @@ class EmailExtractor:
 
 
     def write_emails_to_file(self, all_emails: dict) -> None:
-        with open(f'{self.output_path}/emails.txt', 'w') as file:
+        with open(f'{self.output_path}/{self.text_filename}', 'w') as file:
             counter = 1
             for name, email in all_emails.items():
                 file.write(f'{counter}.{name}: {email}\n')  # writing emails to regular text file
@@ -47,6 +48,7 @@ class EmailExtractor:
         sorted_all_emails = self.sort_emails(all_emails)
 
         self.write_emails_to_file(sorted_all_emails)
+        print(os.path.abspath(self.text_filename))
 
 
 if __name__ == '__main__':
